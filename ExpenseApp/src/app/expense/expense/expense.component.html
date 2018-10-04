@@ -1,0 +1,81 @@
+
+<form #expenseForm="ngForm" (ngSubmit)="onSubmit(expenseForm)">
+
+  
+  <div class="form-group">  
+    <label for="transactionDate">Transaction Date</label>
+    <input [(ngModel)]="expService.presentExpense.transactionDate" 
+            name="transactionDate" 
+            type="date"
+            class="form-control col-md-5"
+            #transactionDate="ngModel"
+            id="transactionDate" required>
+  </div>
+  <div [hidden]="transactionDate.valid || transactionDate.pristine" class="alert alert-danger col-md-4">Date is required</div>
+
+  
+  <div class="form-group">  
+    <!--<label for="amount">Amount</label>-->
+    <input [(ngModel)]="expService.presentExpense.amount"
+            name="amount"
+            min=0
+            oninput="this.value == Math.abs(this.value)"
+            type="number" 
+            class="form-control col-md-4" 
+            #amount="ngModel"
+            placeholder="Amount"
+            id="amount" required>
+  </div>
+  <div [hidden]="amount.valid || amount.pristine" class="alert alert-danger col-md-4">Amount is required</div>
+
+  
+  <div class="form-group">  
+    <!--<label for="recipient">Recipient</label>-->
+    <input [(ngModel)]="expService.presentExpense.recipient"
+            name="recipient"
+            type="text"
+            class="form-control col-md-6"
+            #recipient="ngModel"
+            placeholder="Recipient"
+            id="recipient" required>
+  </div>
+  <div [hidden]="recipient.valid || recipient.pristine" class="alert alert-danger col-md-4">Recipient is required</div>
+
+
+  <div class="form-group">  
+    <label for="currency">Currency</label>
+    <select [(ngModel)]="expService.presentExpense.currency" 
+              name="currency"
+              class="form-control col-md-4"
+              #currency="ngModel"
+              id="currency" required>
+      <option *ngFor="let cur of currencies" [value]="cur.code">{{cur.code}}</option>
+    </select>
+  </div>
+  <div [hidden]="currency.valid || currency.pristine" class="alert alert-danger col-md-4">Currency is required</div>
+
+
+  <div class="form-group">  
+    <!--<label for="expenseType">Expense Type</label>-->
+    <input [(ngModel)]="expService.presentExpense.expenseType"
+            name="expenseType"
+            type="text"
+            class="form-control col-md-7"
+            #expenseType="ngModel"
+            placeholder="Expense Type"
+            id="expenseType" required>
+  </div>
+  <div [hidden]="expenseType.valid || expenseType.pristine" class="alert alert-danger col-md-5">Expense Type is required</div>
+
+
+  <div class="form-row">
+    <div class="col-md-5"> 
+      <button [disabled]="!expenseForm.valid || expService.submitted" type="submit" class="btn btn-block btn-info"><i class="fas fa-calculator"></i> Submit</button>
+    </div>
+    <div class="col-md-3"> 
+      <button (click)="resetForm(expenseForm)" type="button" class="btn btn-block"><i class="fas fa-skull" ></i> Reset</button>
+    </div>
+  </div>
+
+
+</form>
