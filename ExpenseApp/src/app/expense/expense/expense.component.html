@@ -19,7 +19,6 @@
     <input [(ngModel)]="expService.presentExpense.amount"
             name="amount"
             min=0
-            oninput="this.value == Math.abs(this.value)"
             type="number" 
             class="form-control col-md-4" 
             #amount="ngModel"

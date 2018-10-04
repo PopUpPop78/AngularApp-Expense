@@ -14,11 +14,9 @@ export class ErrorService {
       console.error('An error occurred: ', error.error.message);
     }
     else{
-      console.error('A server error occurred. Error: ' + error.message + ' Code: ' + error.status);
+      console.error(JSON.stringify(error));
+      alert(JSON.stringify(error.error));
     }
-    return throwError(
-      'An error occurred. Please contact IT.'
-    )
   }
 
 }
